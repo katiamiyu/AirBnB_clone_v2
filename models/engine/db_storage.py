@@ -16,6 +16,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 
 classes = {"State": State, "City": City, "User": User}
 
+
 class DBStorage:
     """
     database storage class connection
@@ -32,7 +33,15 @@ class DBStorage:
         HBNB_MYSQL_HOST = getenv('HBNB_MYSQL_HOST')
         HBNB_MYSQL_DB = getenv('HBNB_MYSQL_DB')
         HBNB_ENV = getenv('HBNB_ENV')
-        self.__engine = create_engine("mysql://{}:{}@{}/{}".format(HBNB_MYSQL_USER,HBNB_MYSQL_PWD,HBNB_MYSQL_HOST,HBNB_MYSQL_DB), pool_pre_ping=True)
+        self.__engine = create_engine("mysql://{}:{}@{}/{}"
+                                      .format(
+                                              HBNB_MYSQL_USER,
+                                              HBNB_MYSQL_PWD,
+                                              HBNB_MYSQL_HOST,
+                                              HBNB_MYSQL_DB
+                                              ),
+                                      pool_pre_ping=True
+                                      )
         if HBNB_ENV == "test":
             Base.metadata.drop_all(self.__engine)
 
