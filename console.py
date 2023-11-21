@@ -115,10 +115,9 @@ class HBNBCommand(cmd.Cmd):
 
     def parser(self, arg):
         """
-        format the extra attributes of yhe model
-        restructure into dictionary
+        format the the inputs for objects
         """
-        com_dict = {}
+        my_dict = {}
         args = arg.split()
         for ele in args[1:]:
             key = ele.split('=')[0]
@@ -132,8 +131,8 @@ class HBNBCommand(cmd.Cmd):
                     value = float(value)
                 except Exception:
                     value = value.strip('"')
-            com_dict[key] = value
-        return com_dict
+            my_dict[key] = value
+        return my_dict
 
     def do_create(self, args):
         """ Create an object of any class"""
