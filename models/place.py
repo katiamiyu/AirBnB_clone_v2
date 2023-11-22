@@ -5,7 +5,9 @@ from models.review import Review
 from sqlalchemy import Float
 from sqlachelmy import String
 from sqlalchemy import Integer
+from sqlalchemy import Column
 from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship
 
 
 class Place(BaseModel):
@@ -22,4 +24,20 @@ class Place(BaseModel):
     price_by_night = Column(Integer, default=0)
     latitude = Column(Float)
     longitude = Column(Float)
+    amenity = relationship("Amenity", secondary="place_amenity", viewonly=False)
     amenity_ids = []
+
+    if getenv("HBNB_TYPE_STORAGE", None) != "db":
+        def amenity(self):
+            amenity_list = []
+            for amenity in list(models.storage.all(Amenity).values()):
+                if amenity.id in self.amenity_ids:
+                    amenity_list.append(amenity)
+                return amenity_list
+
+            def reviews(self):
+                reviews_list = []
+                for reviews in list(models.storage.all(Reviews).values()):
+                    if reviews.id in self.review_ids:
+                        reviews_list.append(reviews)
+                        return reviews_list
