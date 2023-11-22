@@ -51,7 +51,7 @@ class Place(BaseModel, Base):
         amenity_ids = []
 
     def __init__(self, *args, **kwargs):
-        """initializes Place"""
+        """constructor"""
         super().__init__(*args, **kwargs)
 
     if models.storage_t != 'db':
