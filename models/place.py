@@ -7,6 +7,8 @@ from sqlachelmy import String
 from sqlalchemy import Integer
 from sqlalchemy import Column
 from sqlalchemy import ForeignKey
+from sqlalchemy import Table
+from sqlalchemy import Amenity
 from sqlalchemy.orm import relationship
 
 association_table = Table("place_amenity", Base.metadata, Column("place_id",
@@ -33,14 +35,14 @@ class Place(BaseModel):
     amenity_ids = []
 
     if getenv("HBNB_TYPE_STORAGE", None) != "db":
-        def amenity(self):
+        def amenity(self): @property
             amenity_list = []
             for amenity in list(models.storage.all(Amenity).values()):
                 if amenity.id in self.amenity_ids:
                     amenity_list.append(amenity)
                 return amenity_list
 
-            def reviews(self):
+            def reviews(self): @property
                 reviews_list = []
                 for reviews in list(models.storage.all(Reviews).values()):
                     if reviews.id in self.review_ids:
