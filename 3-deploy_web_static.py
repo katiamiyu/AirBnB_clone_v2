@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-"""Deploy web static archive
+"""
+Deploy web static archive
+fab -f 3-deploy_web_static.py deploy -i my_ssh_private_key -u ubuntu
+env.user = 'ubuntu'
+env.key_filename = '~/.ssh/id_rsa' aftee hosts
 """
 from fabric.api import *
 from datetime import datetime
@@ -7,8 +11,6 @@ from os import path
 
 
 env.hosts = ['52.207.208.233', '35.153.33.171']
-env.user = 'ubuntu'
-env.key_filename = '~/.ssh/id_rsa'
 
 
 def do_pack():
