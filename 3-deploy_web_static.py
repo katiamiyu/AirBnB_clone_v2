@@ -13,7 +13,7 @@ env.key_filename = '~/.ssh/id_rsa'
 
 def do_pack():
         """
-	Function to compress directory
+        Function to compress directory
         """
         now = datetime.now()
         now = now.strftime('%Y%m%d%H%M%S')
@@ -29,7 +29,7 @@ def do_pack():
 
 def do_deploy(archive_path):
         """
-	Deploy web files to server
+        Deploy web files to server
         """
         try:
                 if not (path.exists(archive_path)):
@@ -66,6 +66,6 @@ web_static_{}/ /data/web_static/current'.format(timestamp))
 
 def deploy():
         """
-	Deploy web static
+        Deploy web static
         """
         return do_deploy(do_pack())
