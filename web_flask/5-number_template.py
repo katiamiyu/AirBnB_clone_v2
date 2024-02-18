@@ -35,13 +35,13 @@ def pythoniscool(text='is cool'):
 
 
 @app.route("/number/<int:n>", strict_slashes=False)
-def n_is_integer(n):
+def n_is_integer(n=None):
     return f"{n} is a number"
 
 
 @app.route("/number_template/<int:n>", strict_slashes=False)
 def n_template(n):
-    """display a HTML template,  if n is an integer"""
+    """display a HTML template, if n is an integer"""
     return render_template('5-number.html', n=n)
 
 
